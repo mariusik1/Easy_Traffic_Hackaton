@@ -4,12 +4,196 @@
 		<meta charset="utf-8">
 		<title>Dijkstra</title>
 		<script src="graph.js"></script>
-		//<script src="dijkstras.js"></script>
 	</head>
 	<body>
+	<input type="button" value="Calculate Route" onclick="Calculate_Route();">
+	<select id="AglomeratieMViteaza">
+      <option value=300>Mihai Viteazu liber</option>
+	  <option value=900>Mihai Viteazu aglomerat</option>
+    </select>
+	<br>
+	<input type="text"
+       cols="500" 
+       rows="100" 
+       style="width:0px; height:0px;" 
+       name="Text1" 
+       id="Text1" 
+       value="" /><br>
+	  <font face="Verdana" size="2">
 		<script>
-			var map = {a:{b:3.1,c:3},b:{a:3,c:2,d:3},c:{a:3,b:2,d:3},d:{b:3,c:3}}, graph = new Graph(map);
-			console.log(graph.findShortestPath('a', 'd'));
+		  function Calculate_Route()
+		  {
+			var e = document.getElementById("AglomeratieMViteaza");
+            var Aglomeratie = e.options[e.selectedIndex].value;
+		    var AglomeratieNum = parseInt(Aglomeratie);
+		   
+			var GPS_Coords = [];
+			var curr_GPS_Coord = {Coord_ID: 'A', latitude: 45.777676, longitude: 24.158167, connect: 3, P1: 'B', C1: 120, P2: 'Z', C2: 60, P3: 'J', C3: AglomeratieNum};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'B', latitude: 45.777013, longitude: 24.156993, connect: 3, P1: 'A', C1: 120, P2: 'A1', C2: 30, P3: 'C', C3: 87};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'C', latitude: 45.776509, longitude: 24.156175, connect: 3, P1: 'B', C1: 87, P2: 'C1', C2: 87, P3: 'D', C3: 79};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'D', latitude: 45.776010, longitude: 24.155461, connect: 2, P1: 'C', C1: 87, P2: 'E', C2: 94};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'E', latitude: 45.776640, longitude: 24.154649, connect: 2, P1: 'C1', C1: 81, P2: 'F', C2: 130};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'F', latitude: 45.777555, longitude: 24.153584, connect: 2, P1: 'G', C1: 100, P2: 'B1', C2: 150};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'G', latitude: 45.778268, longitude: 24.152750, connect: 1, P1: 'I', C1: 100};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'I', latitude: 45.778803, longitude: 24.153777, connect: 3, P1: 'G', C1: 100, P2: 'B1', C2: 36, P3: 'J', C3: 100};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'J', latitude: 45.779379, longitude: 24.154783, connect: 3, P1: 'I', C1: 100, P2: 'A', C2: AglomeratieNum, P3: 'K', C3: 130};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			
+			var curr_GPS_Coord = {Coord_ID: 'K', latitude: 45.780011, longitude: 24.155936, connect: 3, P1: 'J', C1: 130, P2: 'E1', C2: 45, P3: 'L', C3: 180};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'L', latitude: 45.781104, longitude: 24.157701, connect: 2, P1: 'K', C1: 180, P2: 'M', C2: 56};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'M', latitude: 45.780761, longitude: 24.158203, connect: 2, P1: 'L', C1: 56, P2: 'N', C2: 12};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'N', latitude: 45.780688, longitude: 24.158079, connect: 2, P1: 'O', C1: 92, P2: 'E1', C2: 180};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'O', latitude: 45.779957, longitude: 24.158573, connect: 3, P1: 'N', C1: 92, P2: 'D1', C2: 190, P3: 'P', C3: 27};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'P', latitude: 45.779932, longitude: 24.158907, connect: 2, P1: 'O', C1: 27, P2: 'R', C2: 29};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'R', latitude: 45.779709, longitude: 24.159127, connect: 3, P1: 'P', C1: 29, P2: 'Q', C2: 68, P3: 'H1', C3: 82};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'Q', latitude: 45.779247, longitude: 24.159677, connect: 3, P1: 'R', C1: 68, P2: 'X', C2: 27, P3: 'G1', C3: 82};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'X', latitude: 45.779084, longitude: 24.159921, connect: 2, P1: 'Q', C1: 27, P2: 'Y', C2: 120};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'Y', latitude: 45.778265, longitude: 24.158926, connect: 3, P1: 'X', C1: 120, P2: 'F1', C2: 30, P3: 'Z', C3: 31};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'Z', latitude: 45.778033, longitude: 24.158644, connect: 3, P1: 'A', C1: 60, P2: 'Y', C2: 31, P3: 'D1', C3: 210};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'A1', latitude: 45.777239, longitude: 24.156753, connect: 2, P1: 'B', C1: 30, P2: 'B1', C2: 350};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'B1', latitude: 45.778522, longitude: 24.154107, connect: 3, P1: 'A1', C1: 350, P2: 'I', C2: 36, P3: 'F', C3: 150};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'C1', latitude: 45.777094, longitude: 24.155445, connect: 2, P1: 'A1', C1: 140, P2: 'E', C2: 81};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'D1', latitude: 45.779390, longitude: 24.156632, connect: 2, P1: 'E1', C1: 43, P2: 'Z', C2: 210};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'E1', latitude: 45.779697, longitude: 24.156287, connect: 2, P1: 'D1', C1: 43, P2: 'K', C2: 45};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'F1', latitude: 45.778429, longitude: 24.158657, connect: 3, P1: 'Y', C1: 30, P2: 'G1', C2: 40, P2: 'H1', C2: 120};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'G1', latitude: 45.778688, longitude: 24.158985, connect: 3, P1: 'F1', C1: 40, P2: 'H1', C2: 84, P3: 'Q', C3: 82};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'H1', latitude: 45.779215, longitude: 24.158346, connect: 3, P1: 'G1', C1: 84, P2: 'R', C2: 82, P3: 'F1', C3: 120};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			//console.log(GPS_Coords.length);
+			
+			var map = {
+			A: {B: GPS_Coords[0].C1, 	Z:  GPS_Coords[0].C2, 	J:  GPS_Coords[0].C3},
+			B: {A: GPS_Coords[1].C1, 	A1: GPS_Coords[1].C2, 	C:  GPS_Coords[1].C3},
+			C: {B: GPS_Coords[2].C1, 	C1: GPS_Coords[2].C2,	D:  GPS_Coords[2].C3},
+			D: {C: GPS_Coords[3].C1, 	E:  GPS_Coords[3].C2},
+			E: {C1: GPS_Coords[4].C1, 	F:  GPS_Coords[4].C2},
+			F: {G: GPS_Coords[5].C1, 	B1: GPS_Coords[5].C2},
+			G: {I: GPS_Coords[6].C1},
+			I: {G: GPS_Coords[7].C1, 	B1: GPS_Coords[7].C2,	J:  GPS_Coords[7].C3},
+			J: {I: GPS_Coords[8].C1, 	A:  GPS_Coords[8].C2,	K:  GPS_Coords[8].C3},
+			K: {J: GPS_Coords[9].C1, 	E1: GPS_Coords[9].C2,	L:  GPS_Coords[9].C3},
+			L: {K: GPS_Coords[10].C1, 	M:  GPS_Coords[10].C2},
+			M: {L: GPS_Coords[11].C1, 	N:  GPS_Coords[11].C2},
+			N: {O: GPS_Coords[12].C1, 	E1: GPS_Coords[12].C2},
+			O: {N: GPS_Coords[13].C1, 	D1: GPS_Coords[13].C2,	P:  GPS_Coords[13].C3},
+			P: {O: GPS_Coords[14].C1,	R:  GPS_Coords[14].C2},
+			R: {P: GPS_Coords[15].C1,	Q:  GPS_Coords[15].C2,	H1: GPS_Coords[15].C3},
+			Q: {R: GPS_Coords[16].C1,	X:  GPS_Coords[16].C2,	G1: GPS_Coords[16].C3},
+			X: {Q: GPS_Coords[17].C1,	Y:  GPS_Coords[17].C2},
+			Y: {X: GPS_Coords[18].C1,	F1: GPS_Coords[18].C2,	Z:  GPS_Coords[18].C3},
+			Z: {A: GPS_Coords[19].C1,	Y:  GPS_Coords[19].C2,	D1: GPS_Coords[19].C3},
+			A1: {B: GPS_Coords[20].C1,	B1: GPS_Coords[20].C2},
+			B1: {A1: GPS_Coords[21].C1,	I:  GPS_Coords[21].C2,	F:  GPS_Coords[21].C3},
+			C1: {A1: GPS_Coords[22].C1,	E:  GPS_Coords[22].C2},
+			D1: {E1: GPS_Coords[23].C1,	Z:  GPS_Coords[23].C2},
+			E1: {D1: GPS_Coords[24].C1,	K:  GPS_Coords[24].C2},
+			F1: {Y: GPS_Coords[25].C1,	G1: GPS_Coords[25].C2,	H1: GPS_Coords[25].C3},
+			G1: {F1: GPS_Coords[26].C1,	H1: GPS_Coords[26].C2,	Q:  GPS_Coords[26].C3},
+			H1: {G1: GPS_Coords[27].C1,	R:  GPS_Coords[27].C2,	F1: GPS_Coords[27].C3},
+			}, graph = new Graph(map);
+			
+			var Shortest_Path = graph.findShortestPath('F', 'C');
+			document.body.innerHTML += "Start point: F, end point: C <br><br>";
+			//console.log(Shortest_Path);
+			document.body.innerHTML += "Shortest route: " + Shortest_Path + "<br><br>";
+			//document.getElementById('Text1').value = "Shortest route: " + Shortest_Path;
+			
+			var GPS_data = "";
+			document.body.innerHTML += "name, latitude, longitude, color <br>";
+			//document.getElementById('Text1').value = "name, latitude, longitude, color";
+			
+			GPS_data += "name, latitude, longitude, color \r\n";
+			
+			//console.log(typeof(Shortest_Path[0]));
+			//console.log(typeof(GPS_Coords[0].Coord_ID));
+			
+			for(j = 0; j < Shortest_Path.length; j++)
+			{
+			  for(i = 0; i < GPS_Coords.length; i++)
+			  {
+			    if(GPS_Coords[i].Coord_ID == Shortest_Path[j])
+				{
+                  document.body.innerHTML += GPS_Coords[i].Coord_ID + ", " + GPS_Coords[i].latitude + ", " + GPS_Coords[i].longitude + ", green" + "<br>";
+				  GPS_data += GPS_Coords[i].Coord_ID + ", " + GPS_Coords[i].latitude + ", " + GPS_Coords[i].longitude + ", green //n";
+				}
+			  }
+			}
+			
+			
+			document.body.innerHTML += "<br>";
+			//document.body.innerHTML += "Rest of points: <br><br>";
+			for(i = 0; i < GPS_Coords.length; i++)
+			{
+			  var found = 0
+			  for(j = 0; j < Shortest_Path.length; j++)
+			  {
+			    if(GPS_Coords[i].Coord_ID == Shortest_Path[j])
+				{
+				  found = 1;
+				}
+			  }
+			  if(found == 0)
+			  {
+			    document.body.innerHTML += GPS_Coords[i].Coord_ID + ", " + GPS_Coords[i].latitude + ", " + GPS_Coords[i].longitude + ", red" + "<br>";
+				GPS_data += GPS_Coords[i].Coord_ID + ", " + GPS_Coords[i].latitude + ", " + GPS_Coords[i].longitude + ", red //n"
+			  }
+			}
+		}
 		</script>
+	  </font>
 	</body>
 </html>

@@ -92,7 +92,7 @@ var Graph = (function (undefined) {
 				shortest = extractShortest(predecessors, end);
 				if (nodes.length) {
 					path.push.apply(path, shortest.slice(0, -1));
-				} else {
+				} else {     
 					return path.concat(shortest);
 				}
 			} else {
