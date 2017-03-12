@@ -33,7 +33,13 @@
     </style>
 	</head>
 	 <body>
-    <div id="floating-panel">
+    <div id="floating-panel" style="margin-left:-150px">
+	<strong>Mihai Viteazu:</strong>
+	<select id="AglomeratieMViteaza">
+      <option value=300>Mihai Viteazu liber</option>
+	  <option value=900>Mihai Viteazu aglomerat</option>
+    </select>
+	<br>
 	<strong>Start:</strong>
     <select id="start">
         <option value="A">A</option>
@@ -70,15 +76,15 @@
       <br>
       <strong>End:</strong>
       <select id="end">
+		<option value="I">I</option>
+		<option value="J">J</option>
+	    <option value="B">B</option>
         <option value="A">A</option>
-        <option value="B">B</option>
         <option value="C">C</option>
         <option value="D">D</option>
         <option value="E">E</option>
         <option value="F">F</option>
         <option value="G">G</option>
-        <option value="I">I</option>
-        <option value="J">J</option>
         <option value="K">K</option>
         <option value="L">L</option>
 		<option value="M">M</option>
@@ -99,18 +105,19 @@
 		<option value="G1">G1</option>
 		<option value="H1">H1</option>
       </select>
-	  <button type="button">Generate</button>
-    </div>
+	
+	
+	</div>
     <div id="map"></div>
 		<script>
-		  function Calculate_Route()
+		  var Calculate_Route = function(startPoint, endPoint)
 		  {
-			//var e = document.getElementById("AglomeratieMViteaza");
-            //var Aglomeratie = e.options[e.selectedIndex].value;
-		    //var AglomeratieNum = parseInt(Aglomeratie);
-		   
+			var e = document.getElementById("AglomeratieMViteaza");
+            var Aglomeratie = e.options[e.selectedIndex].value;
+		    var AglomeratieNum = parseInt(Aglomeratie);
+			alert(AglomeratieNum);
 			var GPS_Coords = [];
-			var curr_GPS_Coord = {Coord_ID: 'A', latitude: 45.777676, longitude: 24.158167, connect: 3, P1: 'B', C1: 120, P2: 'Z', C2: 60, P3: 'J', C3: 300};
+			var curr_GPS_Coord = {Coord_ID: 'A', latitude: 45.777676, longitude: 24.158167, connect: 3, P1: 'B', C1: 120, P2: 'Z', C2: 60, P3: 'J', C3: AglomeratieNum};
 			GPS_Coords.push(curr_GPS_Coord);
 			
 			var curr_GPS_Coord = {Coord_ID: 'B', latitude: 45.777013, longitude: 24.156993, connect: 3, P1: 'A', C1: 120, P2: 'A1', C2: 30, P3: 'C', C3: 87};
@@ -134,7 +141,7 @@
 			var curr_GPS_Coord = {Coord_ID: 'I', latitude: 45.778803, longitude: 24.153777, connect: 3, P1: 'G', C1: 100, P2: 'B1', C2: 36, P3: 'J', C3: 100};
 			GPS_Coords.push(curr_GPS_Coord);
 			
-			var curr_GPS_Coord = {Coord_ID: 'J', latitude: 45.779379, longitude: 24.154783, connect: 3, P1: 'I', C1: 100, P2: 'A', C2: 300, P3: 'K', C3: 130};
+			var curr_GPS_Coord = {Coord_ID: 'J', latitude: 45.779379, longitude: 24.154783, connect: 3, P1: 'I', C1: 100, P2: 'A', C2: AglomeratieNum, P3: 'K', C3: 130};
 			GPS_Coords.push(curr_GPS_Coord);
 			
 			
@@ -227,8 +234,8 @@
 			G1: {F1: GPS_Coords[26].C1,	H1: GPS_Coords[26].C2,	Q:  GPS_Coords[26].C3},
 			H1: {G1: GPS_Coords[27].C1,	R:  GPS_Coords[27].C2,	F1: GPS_Coords[27].C3},
 			}, graph = new Graph(map);
-			alert("i'm here");
-			var Shortest_Path = graph.findShortestPath('F', 'C');
+			var Shortest_Path = graph.findShortestPath(startPoint, endPoint);
+			return Shortest_Path;
 			
 		}
 		      function initMap() {
@@ -282,20 +289,16 @@
 					 G1:{lat:45.778688, lon:24.158985},
 					 H1:{lat:45.779215, lon:24.158346},
 					};
-		Calculate_Route();
-		
-		latStart = array[start].lat;
-		lonStart = array[start].lon;
-		latEnd = array[end].lat;
-		lonEnd = array[end].lon;
+		var shortesPath = Calculate_Route(start, end);
+		alert(shortesPath);
+		latStart = array[shortesPath[0]].lat;
+		lonStart = array[shortesPath[0]].lon;
+		latEnd = array[shortesPath[shortesPath.length-1]].lat;
+		lonEnd = array[shortesPath[shortesPath.length-1]].lon;
 		directionsService.route({
-          origin: {lat: latStart, lng: lonStart},  // Start
-          destination: {lat: latEnd, lng:  lonEnd},  // Ocean Beach.
-          // Note that Javascript allows us to access the constant
-          // using square brackets and a string value as its
-          // "property."
-          //travelMode: google.maps.TravelMode[selectedMode]
-		  travelMode: 'DRIVING'
+			origin: {lat: latStart, lng: lonStart},  
+			destination: {lat: latEnd, lng:  lonEnd},  
+			travelMode: 'DRIVING'
         }, function(response, status) {
           if (status == 'OK') {
             directionsDisplay.setDirections(response);

@@ -5,112 +5,31 @@
 		<meta charset="utf-8">
 		<title>Easy-Traffic</title>
 		<script src="graph.js"></script>
-		<style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #floating-panel {
-        position: absolute;
-        top: 10px;
-        left: 25%;
-        z-index: 5;
-        background-color: #fff;
-        padding: 5px;
-        border: 1px solid #999;
-        text-align: center;
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-      }
-    </style>
 	</head>
-	 <body>
-    <div id="floating-panel">
-	<strong>Start:</strong>
-    <select id="start">
-        <option value="A">A</option>
-        <option value="B">B</option>
-        <option value="C">C</option>
-        <option value="D">D</option>
-        <option value="E">E</option>
-        <option value="F">F</option>
-        <option value="G">G</option>
-        <option value="H">H</option>
-        <option value="I">I</option>
-        <option value="J">J</option>
-        <option value="K">K</option>
-        <option value="L">L</option>
-		<option value="M">M</option>
-		<option value="N">N</option>
-		<option value="O">O</option>
-		<option value="P">P</option>
-		<option value="R">R</option>
-		<option value="Q">Q</option>
-		<option value="X">X</option>
-		<option value="Y">Y</option>
-		<option value="Z">Z</option>
-		<option value="A1">A1</option>
-		<option value="B1">B1</option>
-		<option value="C1">C1</option>
-		<option value="D1">D1</option>
-		<option value="E1">E1</option>
-		<option value="F1">F1</option>
-		<option value="G1">G1</option>
-		<option value="H1">H1</option>
-		
-      </select>
-      <br>
-      <strong>End:</strong>
-      <select id="end">
-        <option value="A">A</option>
-        <option value="B">B</option>
-        <option value="C">C</option>
-        <option value="D">D</option>
-        <option value="E">E</option>
-        <option value="F">F</option>
-        <option value="G">G</option>
-        <option value="I">I</option>
-        <option value="J">J</option>
-        <option value="K">K</option>
-        <option value="L">L</option>
-		<option value="M">M</option>
-		<option value="N">N</option>
-		<option value="O">O</option>
-		<option value="P">P</option>
-		<option value="R">R</option>
-		<option value="Q">Q</option>
-		<option value="X">X</option>
-		<option value="Y">Y</option>
-		<option value="Z">Z</option>
-		<option value="A1">A1</option>
-		<option value="B1">B1</option>
-		<option value="C1">C1</option>
-		<option value="D1">D1</option>
-		<option value="E1">E1</option>
-		<option value="F1">F1</option>
-		<option value="G1">G1</option>
-		<option value="H1">H1</option>
-      </select>
-	  <button type="button">Generate</button>
-    </div>
-    <div id="map"></div>
+	<body>
+	<input type="button" value="Calculate Route" onclick="Calculate_Route();">
+	<select id="AglomeratieMViteaza">
+      <option value=300>Mihai Viteazu liber</option>
+	  <option value=900>Mihai Viteazu aglomerat</option>
+    </select>
+	<br>
+	<input type="text"
+       cols="500" 
+       rows="100" 
+       style="width:0px; height:0px;" 
+       name="Text1" 
+       id="Text1" 
+       value="" /><br>
+	  <font face="Verdana" size="2">
 		<script>
 		  function Calculate_Route()
 		  {
-			//var e = document.getElementById("AglomeratieMViteaza");
-            //var Aglomeratie = e.options[e.selectedIndex].value;
-		    //var AglomeratieNum = parseInt(Aglomeratie);
+			var e = document.getElementById("AglomeratieMViteaza");
+            var Aglomeratie = e.options[e.selectedIndex].value;
+		    var AglomeratieNum = parseInt(Aglomeratie);
 		   
 			var GPS_Coords = [];
-			var curr_GPS_Coord = {Coord_ID: 'A', latitude: 45.777676, longitude: 24.158167, connect: 3, P1: 'B', C1: 120, P2: 'Z', C2: 60, P3: 'J', C3: 300};
+			var curr_GPS_Coord = {Coord_ID: 'A', latitude: 45.777676, longitude: 24.158167, connect: 3, P1: 'B', C1: 120, P2: 'Z', C2: 60, P3: 'J', C3: AglomeratieNum};
 			GPS_Coords.push(curr_GPS_Coord);
 			
 			var curr_GPS_Coord = {Coord_ID: 'B', latitude: 45.777013, longitude: 24.156993, connect: 3, P1: 'A', C1: 120, P2: 'A1', C2: 30, P3: 'C', C3: 87};
@@ -134,7 +53,7 @@
 			var curr_GPS_Coord = {Coord_ID: 'I', latitude: 45.778803, longitude: 24.153777, connect: 3, P1: 'G', C1: 100, P2: 'B1', C2: 36, P3: 'J', C3: 100};
 			GPS_Coords.push(curr_GPS_Coord);
 			
-			var curr_GPS_Coord = {Coord_ID: 'J', latitude: 45.779379, longitude: 24.154783, connect: 3, P1: 'I', C1: 100, P2: 'A', C2: 300, P3: 'K', C3: 130};
+			var curr_GPS_Coord = {Coord_ID: 'J', latitude: 45.779379, longitude: 24.154783, connect: 3, P1: 'I', C1: 100, P2: 'A', C2: AglomeratieNum, P3: 'K', C3: 130};
 			GPS_Coords.push(curr_GPS_Coord);
 			
 			
@@ -229,85 +148,53 @@
 			}, graph = new Graph(map);
 			alert("i'm here");
 			var Shortest_Path = graph.findShortestPath('F', 'C');
+			document.body.innerHTML += "Start point: F, end point: C <br><br>";
+			//console.log(Shortest_Path);
+			document.body.innerHTML += "Shortest route: " + Shortest_Path + "<br><br>";
+			//document.getElementById('Text1').value = "Shortest route: " + Shortest_Path;
 			
+			var GPS_data = "";
+			document.body.innerHTML += "name, latitude, longitude, color <br>";
+			//document.getElementById('Text1').value = "name, latitude, longitude, color";
+			
+			GPS_data += "name, latitude, longitude, color \r\n";
+			
+			//console.log(typeof(Shortest_Path[0]));
+			//console.log(typeof(GPS_Coords[0].Coord_ID));
+			
+			for(j = 0; j < Shortest_Path.length; j++)
+			{
+			  for(i = 0; i < GPS_Coords.length; i++)
+			  {
+			    if(GPS_Coords[i].Coord_ID == Shortest_Path[j])
+				{
+                  document.body.innerHTML += GPS_Coords[i].Coord_ID + ", " + GPS_Coords[i].latitude + ", " + GPS_Coords[i].longitude + ", green" + "<br>";
+				  GPS_data += GPS_Coords[i].Coord_ID + ", " + GPS_Coords[i].latitude + ", " + GPS_Coords[i].longitude + ", green //n";
+				}
+			  }
+			}
+			
+			
+			document.body.innerHTML += "<br>";
+			//document.body.innerHTML += "Rest of points: <br><br>";
+			for(i = 0; i < GPS_Coords.length; i++)
+			{
+			  var found = 0
+			  for(j = 0; j < Shortest_Path.length; j++)
+			  {
+			    if(GPS_Coords[i].Coord_ID == Shortest_Path[j])
+				{
+				  found = 1;
+				}
+			  }
+			  if(found == 0)
+			  {
+			    document.body.innerHTML += GPS_Coords[i].Coord_ID + ", " + GPS_Coords[i].latitude + ", " + GPS_Coords[i].longitude + ", red" + "<br>";
+				GPS_data += GPS_Coords[i].Coord_ID + ", " + GPS_Coords[i].latitude + ", " + GPS_Coords[i].longitude + ", red //n"
+			  }
+			}
 		}
-		      function initMap() {
-        var directionsDisplay = new google.maps.DirectionsRenderer;
-        var directionsService = new google.maps.DirectionsService;
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 14,
-          center: {lat: 37.77, lng: -122.447}
-        });
-        directionsDisplay.setMap(map);
-
-        calculateAndDisplayRoute(directionsService, directionsDisplay);
-		document.getElementById('end').addEventListener('change', function() {
-          calculateAndDisplayRoute(directionsService, directionsDisplay);
-        });
-      }
-
-      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        var start = document.getElementById('start').value;
-		var end = document.getElementById('end').value;
-		var latStart = 0;
-		var lonStart = 0;
-		var latEnd = 0;
-		var lonEnd = 0;
-		var array = {A:{lat:45.777676, lon:24.158167},
-					 B:{lat:45.777013, lon:24.156993},
-					 C:{lat:45.776509, lon:24.156175},
-					 D:{lat:45.776010, lon:24.155461},
-					 E:{lat:45.776640, lon:24.154649},
-					 F:{lat:45.777555, lon:24.153584},
-					 G:{lat:45.778268, lon:24.152750},
-					 I:{lat:45.778803, lon:24.153777},
-					 J:{lat:45.779379, lon:24.154783},
-					 K:{lat:45.780011, lon:24.155936},
-					 L:{lat:45.781104, lon:24.157701},
-					 M:{lat:45.780761, lon:24.158203},
-					 N:{lat:45.780688, lon:24.158079},
-					 O:{lat:45.779957, lon:24.158573},
-					 P:{lat:45.779932, lon:24.158907},
-					 R:{lat:45.779709, lon:24.159127},
-					 Q:{lat:45.779247, lon:24.159677},
-					 X:{lat:45.779084, lon:24.159921},
-					 Y:{lat:45.778265, lon:24.158926},
-					 Z:{lat:45.778033, lon:24.158644},
-					 A1:{lat:45.777239, lon:24.156753},
-					 B1:{lat:45.778522, lon:24.154107},
-					 C1:{lat:45.777094, lon:24.155445},
-					 D1:{lat:45.779390, lon:24.156632},
-					 E1:{lat:45.779697, lon:24.156287},
-					 F1:{lat:45.778429, lon:24.158657},
-					 G1:{lat:45.778688, lon:24.158985},
-					 H1:{lat:45.779215, lon:24.158346},
-					};
-		Calculate_Route();
-		
-		latStart = array[start].lat;
-		lonStart = array[start].lon;
-		latEnd = array[end].lat;
-		lonEnd = array[end].lon;
-		directionsService.route({
-          origin: {lat: latStart, lng: lonStart},  // Start
-          destination: {lat: latEnd, lng:  lonEnd},  // Ocean Beach.
-          // Note that Javascript allows us to access the constant
-          // using square brackets and a string value as its
-          // "property."
-          //travelMode: google.maps.TravelMode[selectedMode]
-		  travelMode: 'DRIVING'
-        }, function(response, status) {
-          if (status == 'OK') {
-            directionsDisplay.setDirections(response);
-          } else {
-            window.alert('Directions request failed due to ' + status);
-          }
-        });
-      }
-	  
 		</script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAT5drVbAuOxcNK2U72a8g08jUVdKjwuXk&callback=initMap">
-    </script>
-  </body>
+	  </font>
+	</body>
 </html>
