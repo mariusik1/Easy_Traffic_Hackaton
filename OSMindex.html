@@ -36,21 +36,21 @@
 	<div id="floating-panel" style="margin-left:-150px">
 	<strong>Mihai Viteazu:</strong>
 	<select id="AglomeratieMViteaza">
-      <option value=300>Mihai Viteazu liber</option>
-	  <option value=900>Mihai Viteazu aglomerat</option>
+      <option value=300>liber</option>
+	  <option value=900>aglomerat</option>
     </select>
 	<br>
 	<strong>Start:</strong>
     <select id="start">
-        <option value="A">A</option>
+        <option value="A">Piata Rahovei</option>
         <option value="B">B</option>
         <option value="C">C</option>
         <option value="D">D</option>
         <option value="E">E</option>
         <option value="F">F</option>
-        <option value="G">G</option>
+        <option value="G">Ostirii - Iorga</option>
         <option value="H">H</option>
-        <option value="I">I</option>
+        <option value="I">Catedrala</option>
         <option value="J">J</option>
         <option value="K">K</option>
         <option value="L">L</option>
@@ -60,7 +60,7 @@
 		<option value="P">P</option>
 		<option value="R">R</option>
 		<option value="Q">Q</option>
-		<option value="X">X</option>
+		<option value="X">Rahovei</option>
 		<option value="Y">Y</option>
 		<option value="Z">Z</option>
 		<option value="A1">A1</option>
@@ -73,18 +73,18 @@
 		<option value="H1">H1</option>
 		
       </select>
-      <br>
+
       <strong>End:</strong>
       <select id="end">
-		<option value="I">I</option>
+		<option value="I">Catedrala</option>
 		<option value="J">J</option>
 	    <option value="B">B</option>
-        <option value="A">A</option>
+        <option value="A">Piata Rahovei</option>
         <option value="C">C</option>
         <option value="D">D</option>
         <option value="E">E</option>
         <option value="F">F</option>
-        <option value="G">G</option>
+        <option value="G">Ostirii - Iorga</option>
         <option value="K">K</option>
         <option value="L">L</option>
 		<option value="M">M</option>
@@ -93,7 +93,7 @@
 		<option value="P">P</option>
 		<option value="R">R</option>
 		<option value="Q">Q</option>
-		<option value="X">X</option>
+		<option value="X">Rahovei</option>
 		<option value="Y">Y</option>
 		<option value="Z">Z</option>
 		<option value="A1">A1</option>
@@ -181,10 +181,16 @@
 			var curr_GPS_Coord = {Coord_ID: 'Z', latitude: 45.778033, longitude: 24.158644, connect: 3, P1: 'A', C1: 60, P2: 'Y', C2: 31, P3: 'D1', C3: 210};
 			GPS_Coords.push(curr_GPS_Coord);
 			
-			var curr_GPS_Coord = {Coord_ID: 'A1', latitude: 45.777239, longitude: 24.156753, connect: 2, P1: 'B', C1: 30, P2: 'B1', C2: 350};
+			var curr_GPS_Coord = {Coord_ID: 'A1', latitude: 45.777239, longitude: 24.156753, connect: 3, P1: 'B', C1: 30, P2: 'B1', C2: 350, P3: 'A12', C3: 61};
 			GPS_Coords.push(curr_GPS_Coord);
 			
-			var curr_GPS_Coord = {Coord_ID: 'B1', latitude: 45.778522, longitude: 24.154107, connect: 3, P1: 'A1', C1: 350, P2: 'I', C2: 36, P3: 'F', C3: 150};
+			var curr_GPS_Coord = {Coord_ID: 'B1', latitude: 45.778522, longitude: 24.154107, connect: 4, P1: 'A1', C1: 350, P2: 'I', C2: 36, P3: 'F', C3: 150, P4: 'B12', C4: 63};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'B12', latitude: 45.778868, longitude: 24.154709, connect: 2, P1: 'B1', C1: 63, P2: 'A12', C2: 240};
+			GPS_Coords.push(curr_GPS_Coord);
+			
+			var curr_GPS_Coord = {Coord_ID: 'A12', latitude: 45.777612, longitude: 24.157287, connect: 2, P1: 'B12', C1: 240, P2: 'A1', C2: 61};
 			GPS_Coords.push(curr_GPS_Coord);
 			
 			var curr_GPS_Coord = {Coord_ID: 'C1', latitude: 45.777094, longitude: 24.155445, connect: 2, P1: 'A1', C1: 140, P2: 'E', C2: 81};
@@ -226,14 +232,16 @@
 			X: {Q: GPS_Coords[17].C1,	Y:  GPS_Coords[17].C2},
 			Y: {X: GPS_Coords[18].C1,	F1: GPS_Coords[18].C2,	Z:  GPS_Coords[18].C3},
 			Z: {A: GPS_Coords[19].C1,	Y:  GPS_Coords[19].C2,	D1: GPS_Coords[19].C3},
-			A1: {B: GPS_Coords[20].C1,	B1: GPS_Coords[20].C2},
-			B1: {A1: GPS_Coords[21].C1,	I:  GPS_Coords[21].C2,	F:  GPS_Coords[21].C3},
+			A1: {B: GPS_Coords[20].C1,	B1: GPS_Coords[20].C2,	A12:GPS_Coords[20].C3},
+			B1: {A1: GPS_Coords[21].C1,	I:  GPS_Coords[21].C2,	F:  GPS_Coords[21].C3, B12:  GPS_Coords[21].C4},
 			C1: {A1: GPS_Coords[22].C1,	E:  GPS_Coords[22].C2},
 			D1: {E1: GPS_Coords[23].C1,	Z:  GPS_Coords[23].C2},
 			E1: {D1: GPS_Coords[24].C1,	K:  GPS_Coords[24].C2},
 			F1: {Y: GPS_Coords[25].C1,	G1: GPS_Coords[25].C2,	H1: GPS_Coords[25].C3},
 			G1: {F1: GPS_Coords[26].C1,	H1: GPS_Coords[26].C2,	Q:  GPS_Coords[26].C3},
 			H1: {G1: GPS_Coords[27].C1,	R:  GPS_Coords[27].C2,	F1: GPS_Coords[27].C3},
+			A12: {B12: GPS_Coords[28].C1,	A1:  GPS_Coords[28].C2},
+			B12: {B1: GPS_Coords[29].C1,	A12:  GPS_Coords[29].C2},
 			}, graph = new Graph(map);
 			var Shortest_Path = graph.findShortestPath(start, end);
 			var array = {A:{lat:45.777676, lon:24.158167},
@@ -264,6 +272,8 @@
 					 F1:{lat:45.778429, lon:24.158657},
 					 G1:{lat:45.778688, lon:24.158985},
 					 H1:{lat:45.779215, lon:24.158346},
+					 A12:{lat:45.777612, lon:24.157287},
+					 B12:{lat:45.778868, lon:24.154709},
 					};
             // Initialize
 			
